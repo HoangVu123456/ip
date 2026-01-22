@@ -48,10 +48,43 @@ public class Stephen {
                 System.out.println("____________________________________________________________");
                 break;
             } else {
-                history.add(new Task(input));
-                System.out.println("____________________________________________________________");
-                System.out.println("added: " + input);
-                System.out.println("____________________________________________________________");
+                if (input.startsWith("todo ")) {
+                    String description = input.substring(5).trim();
+                    Task newTask = new ToDosTask(description);
+                    history.add(newTask);
+                    System.out.println("____________________________________________________________");
+                    System.out.println("Got it. I've added this task: ");
+                    System.out.println(newTask.toString());
+                    System.out.println("Now you have " + history.size() + " tasks in the list.");
+                    System.out.println("____________________________________________________________");
+                } else if (input.startsWith("deadline ")) {
+                    String[] parts = input.substring(9).split(" /by ");
+                    if (parts.length == 2) {
+                        String description = parts[0].trim();
+                        String by = parts[1].trim();
+                        Task newTask = new DeadlinesTask(description, by);
+                        history.add(newTask);
+                        System.out.println("____________________________________________________________");
+                        System.out.println("Got it. I've added this task: ");
+                        System.out.println(newTask.toString());
+                        System.out.println("Now you have " + history.size() + " tasks in the list.");
+                        System.out.println("____________________________________________________________");
+                    }
+                } else if (input.startsWith("event ")) {
+                    String[] parts = input.substring(6).split(" /from | /to ");
+                    if (parts.length == 3) {
+                        String description = parts[0].trim();
+                        String from = parts[1].trim();
+                        String to = parts[2].trim();
+                        Task newTask = new EventsTask(description, from, to);
+                        history.add(newTask);
+                        System.out.println("____________________________________________________________");
+                        System.out.println("Got it. I've added this task: ");
+                        System.out.println(newTask.toString());
+                        System.out.println("Now you have " + history.size() + " tasks in the list.");
+                        System.out.println("____________________________________________________________");
+                    }
+                }
             }
         }
         sc.close();
