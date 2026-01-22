@@ -1,8 +1,9 @@
-import java.util.Scanner;
+import java.util.*;
 
 public class Stephen {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
+        List<String> history = new ArrayList<>();
 
         System.out.println("____________________________________________________________");
         System.out.println("Hello! I'm Stephen");
@@ -14,17 +15,24 @@ public class Stephen {
 
             if (input.equals("list")) {
                 System.out.println("____________________________________________________________");
-                System.out.println("list");
-                System.out.println("____________________________________________________________");
-            } else if (input.equals("blah")) {
-                System.out.println("____________________________________________________________");
-                System.out.println("blah");
+                if (history.isEmpty()) {
+                    System.out.println("list");
+                } else {
+                    for (int i = 0; i < history.size(); i++) {
+                        System.out.println((i + 1) + ". " + history.get(i));
+                    }
+                }
                 System.out.println("____________________________________________________________");
             } else if (input.equals("bye")) {
                 System.out.println("____________________________________________________________");
                 System.out.println("Bye. Hope to see you again soon!");
                 System.out.println("____________________________________________________________");
                 break;
+            } else {
+                history.add(input);
+                System.out.println("____________________________________________________________");
+                System.out.println("recorded: " + input);
+                System.out.println("____________________________________________________________");
             }
         }
         sc.close();
