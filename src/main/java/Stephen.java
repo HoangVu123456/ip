@@ -15,8 +15,9 @@ public class Stephen {
 
             if (input.equals("list")) {
                 System.out.println("____________________________________________________________");
+                System.out.println("Here are the tasks in your list:");
                 if (history.isEmpty()) {
-                    System.out.println("list");
+                    System.out.println("");
                 } else {
                     for (int i = 0; i < history.size(); i++) {
                         System.out.println((i + 1) + ". " + history.get(i));
