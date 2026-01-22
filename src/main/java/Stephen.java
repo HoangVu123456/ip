@@ -31,7 +31,7 @@ public class Stephen {
             } else {
                 history.add(input);
                 System.out.println("____________________________________________________________");
-                System.out.println("recorded: " + input);
+                System.out.println("added: " + input);
                 System.out.println("____________________________________________________________");
             }
         }
