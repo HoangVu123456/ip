@@ -38,6 +38,7 @@ public class Stephen {
                     }
                     history.get(index).mark();
                     System.out.println("Nice! I've marked this task as done: " + history.get(index).toString());
+                    System.out.println("____________________________________________________________");
                 } else if (input.startsWith("unmark ")) {
                     System.out.println("____________________________________________________________");
                     int index = Integer.parseInt(input.substring(7)) - 1;
@@ -46,6 +47,17 @@ public class Stephen {
                     }
                     history.get(index).unmark();
                     System.out.println("OK, I've marked this task as not done yet: " + history.get(index).toString());
+                    System.out.println("____________________________________________________________");
+                } else if (input.startsWith("delete ")) {
+                    System.out.println("____________________________________________________________");
+                    int index = Integer.parseInt(input.substring(7)) - 1;
+                    if (index < 0 || index >= history.size()) {
+                        throw new InvalidNumberException("Invalid or out of bounds task number. Please enter a value between 1 and " + history.size());
+                    }
+                    Task removedTask = history.remove(index);
+                    System.out.println("Noted. I've removed this task: " + removedTask.toString());
+                    System.out.println("Now you have " + history.size() + " tasks in the list.");
+                    System.out.println("____________________________________________________________");
                 } else if (input.equals("bye")) {
                     System.out.println("____________________________________________________________");
                     System.out.println("Bye. Hope to see you again soon!");
