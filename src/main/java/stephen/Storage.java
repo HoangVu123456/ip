@@ -122,11 +122,13 @@ public class Storage {
                     line += task.toString().substring(8);
                 } else if (task instanceof DeadlinesTask) {
                     String[] parts = task.toString().substring(8).split(" \\(by: ");
-                    line += parts[0] + " | " + parts[1].substring(0, parts[1].length() - 1);
+                    line += parts[0] + " | " 
+                        + parts[1].substring(0, parts[1].length() - 1);
                 } else if (task instanceof EventsTask) {
                     String[] parts = task.toString().substring(8).split(" \\(from: ");
                     String[] timeParts = parts[1].split(" to: ");
-                    line += parts[0] + " | " + timeParts[0] + " | " + timeParts[1].substring(0, timeParts[1].length() - 1);
+                    line += parts[0] + " | " + timeParts[0] + " | " 
+                        + timeParts[1].substring(0, timeParts[1].length() - 1);
                 }
 
                 fw.write(line + "\n");
