@@ -1,9 +1,8 @@
 package stephen;
 
 import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.io.InputStreamReader;
 import java.util.List;
 
 /**
@@ -15,7 +14,7 @@ public class Stephen {
      */
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        List<Task> history = new ArrayList<>();
+        List<Task> history = Storage.load();
 
         System.out.println("____________________________________________________________");
         System.out.println("Hello! I'm Stephen");
@@ -56,6 +55,7 @@ public class Stephen {
                     history.get(markIndex).mark();
                     System.out.println("Nice! I've marked this task as done: " + history.get(markIndex).toString());
                     System.out.println("____________________________________________________________");
+                    Storage.save(history);
                     break;
                 case UNMARK:
                     System.out.println("____________________________________________________________");
@@ -68,6 +68,7 @@ public class Stephen {
                     history.get(unmarkIndex).unmark();
                     System.out.println("OK, I've marked this task as not done yet: " + history.get(unmarkIndex).toString());
                     System.out.println("____________________________________________________________");
+                    Storage.save(history);
                     break;
                 case DELETE:
                     System.out.println("____________________________________________________________");
@@ -81,6 +82,7 @@ public class Stephen {
                     System.out.println("Noted. I've removed this task: " + removedTask.toString());
                     System.out.println("Now you have " + history.size() + " tasks in the list.");
                     System.out.println("____________________________________________________________");
+                    Storage.save(history);
                     break;
                 case BYE:
                     System.out.println("____________________________________________________________");
@@ -102,6 +104,7 @@ public class Stephen {
                     System.out.println(todoTask.toString());
                     System.out.println("Now you have " + history.size() + " tasks in the list.");
                     System.out.println("____________________________________________________________");
+                    Storage.save(history);
                     break;
                 case DEADLINE:
                     String[] deadlineParts = input.substring(9).split(" /by ");
@@ -124,6 +127,7 @@ public class Stephen {
                     System.out.println(deadlineTask.toString());
                     System.out.println("Now you have " + history.size() + " tasks in the list.");
                     System.out.println("____________________________________________________________");
+                    Storage.save(history);
                     break;
                 case EVENT:
                     String[] eventParts = input.substring(6).split(" /from | /to ");
@@ -149,6 +153,7 @@ public class Stephen {
                     System.out.println(eventTask.toString());
                     System.out.println("Now you have " + history.size() + " tasks in the list.");
                     System.out.println("____________________________________________________________");
+                    Storage.save(history);
                     break;
                 case UNKNOWN:
                 default:
