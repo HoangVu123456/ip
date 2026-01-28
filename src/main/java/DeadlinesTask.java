@@ -1,3 +1,8 @@
+package stephen;
+
+/**
+ * Class representing a deadlne task.
+ */
 public class DeadlinesTask extends Task {
     private String deadlines;
 

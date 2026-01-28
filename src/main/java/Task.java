@@ -1,3 +1,8 @@
+package stephen;
+
+/**
+ * Class representing a generic task.
+ */
 public class Task {
     private String description;
     private boolean isDone;
@@ -7,10 +12,16 @@ public class Task {
         this.isDone = false;
     }
 
+    /**
+     * Marks the task has been done.
+     */
     public void mark() {
         this.isDone = true;
     }
 
+    /**
+     * Unmarks the task as not done.
+     */
     public void unmark() {
         this.isDone = false;
     }

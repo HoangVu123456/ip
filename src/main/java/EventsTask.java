@@ -1,3 +1,8 @@
+package stephen;
+
+/**
+ * Class representing an event task.
+ */
 public class EventsTask extends Task {
     private String from;
     private String to;

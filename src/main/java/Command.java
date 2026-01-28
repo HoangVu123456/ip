@@ -1,6 +1,15 @@
+package stephen;
+
+/**
+ * Enum representing different commands that can be
+ * used to communicate with the chatbot.
+ */
 public enum Command {
     LIST, MARK, UNMARK, DELETE, TODO, DEADLINE, EVENT, BYE, UNKNOWN;
 
+    /**
+     * Returns the Command enum corresponding to what the user input.
+     */
     public static Command command(String input) {
         if (input.equals("list")) {
             return LIST;
