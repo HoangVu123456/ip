@@ -1,9 +1,9 @@
 package stephen;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.FileReader;
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -119,17 +119,19 @@ public class Storage {
                 }
 
                 if (task instanceof ToDosTask) {
-                    line += task.toString().substring(6);
+                    line += task.toString().substring(8);
                 } else if (task instanceof DeadlinesTask) {
-                    String[] parts = task.toString().substring(6).split(" \\(by: ");
+                    String[] parts = task.toString().substring(8).split(" \\(by: ");
                     line += parts[0] + " | " + parts[1].substring(0, parts[1].length() - 1);
                 } else if (task instanceof EventsTask) {
-                    String[] parts = task.toString().substring(6).split(" \\(from: ");
+                    String[] parts = task.toString().substring(8).split(" \\(from: ");
                     String[] timeParts = parts[1].split(" to: ");
                     line += parts[0] + " | " + timeParts[0] + " | " + timeParts[1].substring(0, timeParts[1].length() - 1);
                 }
+
+                fw.write(line + "\n");
             }
-            fw.write(line + "\n");
+
             fw.close();
         } catch (IOException e) {
             System.out.println(e.getMessage());
