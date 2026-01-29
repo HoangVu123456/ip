@@ -65,6 +65,9 @@ public class Stephen {
                 case EVENT:
                     handleEvent(input);
                     break;
+                case FIND:
+                    handleFind(input);
+                    break;
                 case UNKNOWN:
                 default:
                     throw new InvalidInputException(
@@ -220,6 +223,36 @@ public class Stephen {
         ui.println("Now you have " + tasks.size() + " tasks in the list.");
         ui.showLine();
         storage.save(tasks.getTasks());
+    }
+
+    /**
+     * Handles the find command
+     */
+    private void handleFind(String input) {
+        String keyword = input.substring(5).trim();
+        if (keyword.isEmpty()) {
+            throw new EmptyTaskException(
+                "The search keyword cannot be empty! Please provide a keyword."
+            );
+        }
+        
+        ui.showLine();
+        ui.println("Here are the matching tasks in your list:");
+        
+        int matchCount = 0;
+        for (int i = 0; i < tasks.size(); i++) {
+            Task task = tasks.getTask(i);
+            if (task.getDesScription().contains(keyword)) {
+                matchCount++;
+                ui.println(matchCount + "." + task.toString());
+            }
+        }
+        
+        if (matchCount == 0) {
+            ui.println("You have no matching tasks in your list.");
+        }
+        
+        ui.showLine();
     }
 
     /**

@@ -16,6 +16,10 @@ public class Task {
         return this.isDone;
     }
 
+    public String getDesScription() {
+        return this.description;
+    }
+
     /**
      * Marks the task has been done.
      */
