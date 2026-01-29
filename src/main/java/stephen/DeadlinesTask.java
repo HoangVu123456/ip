@@ -1,18 +1,31 @@
 package stephen;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 /**
  * Class representing a deadlne task.
  */
 public class DeadlinesTask extends Task {
-    private String deadlines;
+    private LocalDateTime deadlines;
 
     public DeadlinesTask(String description, String deadlines) {
+        super(description);
+        this.deadlines = LocalDateTime.parse(deadlines, DateTimeFormatter.ofPattern("d/M/yyyy HHmm"));
+    }
+
+    public DeadlinesTask(String description, LocalDateTime deadlines) {
         super(description);
         this.deadlines = deadlines;
     }
 
+    public LocalDateTime getDeadlines() {
+        return this.deadlines;
+    }
+
     @Override
     public String toString() {
-        return "[D] " + super.toString() + " (by: " + deadlines + ")";
+        DateTimeFormatter outputformatter = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
+        return "[D] " + super.toString() + " (by: " + deadlines.format(outputformatter) + ")";
     }
 }
