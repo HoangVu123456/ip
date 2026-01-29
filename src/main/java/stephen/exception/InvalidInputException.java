@@ -1,4 +1,4 @@
-package stephen;
+package stephen.exception;
 
 /**
  * Exception thrown when the command input is invalid.

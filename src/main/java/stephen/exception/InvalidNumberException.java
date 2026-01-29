@@ -1,4 +1,4 @@
-package stephen;
+package stephen.exception;
 
 /**
  * Exception thrown when the number provided is invalid or out of bounds.
