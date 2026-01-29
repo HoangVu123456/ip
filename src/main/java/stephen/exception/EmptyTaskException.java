@@ -1,4 +1,4 @@
-package stephen;
+package stephen.exception;
 
 /**
  * Exception thrown when the command lack essential information about the task.
