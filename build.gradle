@@ -1,6 +1,7 @@
 plugins {
     id 'java'
     id 'application'
+    id 'com.gradleup.shadow' version '9.3.1'
 }
 
 repositories {
@@ -35,4 +36,8 @@ application {
 
 run {
     enableAssertions = true
+}
+
+shadowJar {
+    archiveFileName = 'stephen.jar'
 }
