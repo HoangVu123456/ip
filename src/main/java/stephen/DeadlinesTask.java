@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Class representing a deadlne task.
+ * Represents a deadlne task.
  */
 public class DeadlinesTask extends Task {
     private LocalDateTime deadlines;

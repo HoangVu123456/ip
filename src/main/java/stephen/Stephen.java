@@ -6,7 +6,7 @@ import stephen.exception.InvalidNumberException;
 import stephen.exception.WrongFormatException;
 
 /**
- * The main class of the Stephen chatbot.
+ * Runs the Stephen chatbot.
  */
 public class Stephen {
     private Storage storage;
@@ -78,7 +78,7 @@ public class Stephen {
     }
 
     /**
-     * Method to handle the 'list' command.
+     * Handles the 'list' command.
      */
     private void handleList() {
         ui.showLine();
@@ -94,7 +94,7 @@ public class Stephen {
     }
 
     /**
-     * Method to handle the 'mark' command.
+     * Handles the 'mark' command.
      */
     private void handleMark(String input) {
         ui.showLine();
@@ -111,7 +111,7 @@ public class Stephen {
     }
 
     /**
-     * Method to handle the 'unmark' command.
+     * Handles the 'unmark' command.
      */
     private void handleUnmark(String input) {
         ui.showLine();
@@ -128,7 +128,7 @@ public class Stephen {
     }
 
     /**
-     * Method to handle the 'delete' command.
+     * Handles the 'delete' command.
      */
     private void handleDelete(String input) {
         ui.showLine();
@@ -146,7 +146,7 @@ public class Stephen {
     }
 
     /**
-     * Method to handle the 'todo' command.
+     * Handles the 'todo' command.
      */
     private void handleToDo(String input) {
         String todoDescription = input.substring(5).trim();
@@ -166,7 +166,7 @@ public class Stephen {
     }
 
     /**
-     * Method to handle the 'deadline' command.
+     * Handles the 'deadline' command.
      */
     private void handleDeadline(String input) {
         String[] deadlineParts = input.substring(9).split(" /by ");
@@ -193,7 +193,7 @@ public class Stephen {
     }
 
     /**
-     * Method to handle the 'event' command.
+     * Handles the 'event' command.
      */
     private void handleEvent(String input) {
         String[] eventParts = input.substring(6).split(" /from | /to ");
@@ -223,7 +223,7 @@ public class Stephen {
     }
 
     /**
-     * The main method that runs Stephen chatbot.
+     * Runs the whole program.
      */
     public static void main(String[] args) {
         Stephen stephen = new Stephen();

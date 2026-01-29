@@ -1,7 +1,7 @@
 package stephen;
 
 /**
- * Class representing a generic task.
+ * Represents a generic task.
  */
 public class Task {
     private String description;
@@ -17,7 +17,7 @@ public class Task {
     }
 
     /**
-     * Marks the task has been done.
+     * Marks the task as done.
      */
     public void mark() {
         this.isDone = true;

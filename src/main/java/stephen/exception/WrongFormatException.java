@@ -1,7 +1,7 @@
 package stephen.exception;
 
 /**
- * Exception thrown when the command format does not match the expected pattern.
+ * Throws an exception when the format of the input is wrong.
  */
 public class WrongFormatException extends RuntimeException {
     public WrongFormatException(String message) {

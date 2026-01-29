@@ -1,7 +1,7 @@
 package stephen.exception;
 
 /**
- * Exception thrown when the command lack essential information about the task.
+ * Throws an exception when a task description is empty.
  */
 public class EmptyTaskException extends RuntimeException {
     public EmptyTaskException(String message) {
