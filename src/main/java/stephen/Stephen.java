@@ -96,7 +96,7 @@ public class Stephen {
         if (markIndex < 0 || markIndex >= tasks.size()) {
             throw new InvalidNumberException(
                 "Invalid or out of bounds task number. Please enter a value between 1 and "
-                    + tasks.size());
+                        + tasks.size());
         }
         tasks.getTask(markIndex).mark();
         ui.println("Nice! I've marked this task as done: " + tasks.getTask(markIndex).toString());
@@ -110,7 +110,7 @@ public class Stephen {
         if (unmarkIndex < 0 || unmarkIndex >= tasks.size()) {
             throw new InvalidNumberException(
                 "Invalid or out of bounds task number. Please enter a value between 1 and "
-                    + tasks.size());
+                        + tasks.size());
         }
         tasks.getTask(unmarkIndex).unmark();
         ui.println("OK, I've marked this task as not done yet: " + tasks.getTask(unmarkIndex).toString());
@@ -124,7 +124,7 @@ public class Stephen {
         if (deleteIndex < 0 || deleteIndex >= tasks.size()) {
             throw new InvalidNumberException(
                 "Invalid or out of bounds task number. Please enter a value between 1 and " 
-                    + tasks.size());
+                        + tasks.size());
         }
         Task removedTask = tasks.deleteTask(deleteIndex);
         ui.println("Noted. I've removed this task: " + removedTask.toString());
@@ -179,7 +179,7 @@ public class Stephen {
         if (eventParts.length != 3) {
             throw new WrongFormatException(
                 "Wrong format for event task command! "
-                    + "Please use format: event <description> /from <start> /to <end>"
+                        + "Please use format: event <description> /from <start> /to <end>"
             );
         }
         String eventDescription = eventParts[0].trim();
@@ -188,7 +188,7 @@ public class Stephen {
         if (eventDescription.isEmpty() || from.isEmpty() || to.isEmpty()) {
             throw new EmptyTaskException(
                 "The command is missing essential information. "
-                    + "The description, start time, and end time cannot be empty."
+                        + "The description, start time, and end time cannot be empty."
             );
         }
         Task eventTask = new EventsTask(eventDescription, from, to);
