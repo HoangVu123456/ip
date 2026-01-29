@@ -10,14 +10,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Class handling the load and save chat history data to the local storage file.
+ * Class represents a storage handler for loading and saving chat history.
  */
 public class Storage {
     private static final String FILE_PATH = "./data/chat_history_data.txt";
 
-    private Storage() {}
+    public Storage() {}
 
-    private static Task parseLineToTask(String data) {
+    private Task parseLineToTask(String data) {
         String[] parts = data.split(" \\| ");
         String taskType = parts[0];
         String isDoneString = parts[1];
@@ -64,7 +64,7 @@ public class Storage {
     /**
      * Loads the chat history from the local storage file.
      */
-    public static List<Task> load() {
+    public List<Task> load() {
         List<Task> history = new ArrayList<>();
         File file = new File(FILE_PATH);
 
@@ -93,7 +93,7 @@ public class Storage {
     /**
      * Saves and write the chat history to the local storage file.
      */
-    public static void save(List<Task> history) {
+    public void save(List<Task> history) {
         try {
             File directory = new File("./data");
             
