@@ -5,7 +5,7 @@ package stephen;
  * used to communicate with the chatbot.
  */
 public enum Command {
-    LIST, MARK, UNMARK, DELETE, TODO, DEADLINE, EVENT, BYE, UNKNOWN;
+    LIST, MARK, UNMARK, DELETE, TODO, DEADLINE, EVENT, FIND, BYE, UNKNOWN;
 
     /**
      * Returns the Command enum corresponding to what the user input.
@@ -25,6 +25,8 @@ public enum Command {
             return DEADLINE;
         } else if (input.startsWith("event ")) {
             return EVENT;
+        } else if (input.startsWith("find ")) {
+            return FIND;
         } else if (input.equals("bye")) {
             return BYE;
         } else {
