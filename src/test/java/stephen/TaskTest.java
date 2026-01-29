@@ -15,7 +15,7 @@ public class TaskTest {
     @Test
     public void testTaskInitialization() {
         Task task = new Task("Watch a movie");
-        assertFalse(task.getIsDone());
+        assertFalse(task.isDone());
         assertEquals("[ ] Watch a movie", task.toString());
     }
 
@@ -26,7 +26,7 @@ public class TaskTest {
     public void testMark() {
         Task task = new Task("Watch a movie");
         task.mark();
-        assertTrue(task.getIsDone());
+        assertTrue(task.isDone());
         assertEquals("[X] Watch a movie", task.toString());
     }
 
@@ -37,10 +37,10 @@ public class TaskTest {
     public void testUnmark() {
         Task task = new Task("Watch a movie");
         task.mark();
-        assertTrue(task.getIsDone());
+        assertTrue(task.isDone());
         
         task.unmark();
-        assertFalse(task.getIsDone());
+        assertFalse(task.isDone());
         assertEquals("[ ] Watch a movie", task.toString());
     }
 
@@ -50,16 +50,16 @@ public class TaskTest {
     @Test
     public void testMarkAndUnmarkCycle() {
         Task task = new Task("Watch a movie");
-        assertFalse(task.getIsDone());
+        assertFalse(task.isDone());
         
         task.mark();
-        assertTrue(task.getIsDone());
+        assertTrue(task.isDone());
         
         task.unmark();
-        assertFalse(task.getIsDone());
+        assertFalse(task.isDone());
         
         task.mark();
-        assertTrue(task.getIsDone());
+        assertTrue(task.isDone());
     }
 
     /**

@@ -105,7 +105,7 @@ public class Storage {
 
             for (int i = 0; i < history.size(); i++) {
                 Task task = history.get(i);
-                boolean isDone = task.getIsDone();
+                boolean isDone = task.isDone();
                 String line = "";
 
                 if (task instanceof ToDosTask) {
