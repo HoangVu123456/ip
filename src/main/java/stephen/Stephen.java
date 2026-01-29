@@ -77,6 +77,9 @@ public class Stephen {
         }
     }
 
+    /**
+     * Method to handle the 'list' command.
+     */
     private void handleList() {
         ui.showLine();
         ui.println("Here are the tasks in your list:");
@@ -90,6 +93,9 @@ public class Stephen {
         ui.showLine();
     }
 
+    /**
+     * Method to handle the 'mark' command.
+     */
     private void handleMark(String input) {
         ui.showLine();
         int markIndex = Integer.parseInt(input.substring(5)) - 1;
@@ -104,6 +110,9 @@ public class Stephen {
         storage.save(tasks.getTasks());
     }
 
+    /**
+     * Method to handle the 'unmark' command.
+     */
     private void handleUnmark(String input) {
         ui.showLine();
         int unmarkIndex = Integer.parseInt(input.substring(7)) - 1;
@@ -118,6 +127,9 @@ public class Stephen {
         storage.save(tasks.getTasks());
     }
 
+    /**
+     * Method to handle the 'delete' command.
+     */
     private void handleDelete(String input) {
         ui.showLine();
         int deleteIndex = Integer.parseInt(input.substring(7)) - 1;
@@ -133,6 +145,9 @@ public class Stephen {
         storage.save(tasks.getTasks());
     }
 
+    /**
+     * Method to handle the 'todo' command.
+     */
     private void handleToDo(String input) {
         String todoDescription = input.substring(5).trim();
         if (todoDescription.isEmpty()) {
@@ -150,6 +165,9 @@ public class Stephen {
         storage.save(tasks.getTasks());
     }
 
+    /**
+     * Method to handle the 'deadline' command.
+     */
     private void handleDeadline(String input) {
         String[] deadlineParts = input.substring(9).split(" /by ");
         if (deadlineParts.length != 2) {
@@ -174,6 +192,9 @@ public class Stephen {
         storage.save(tasks.getTasks());
     }
 
+    /**
+     * Method to handle the 'event' command.
+     */
     private void handleEvent(String input) {
         String[] eventParts = input.substring(6).split(" /from | /to ");
         if (eventParts.length != 3) {

@@ -17,6 +17,9 @@ public class Storage {
 
     public Storage() {}
 
+    /**
+     * Parses a line from the storage file into a Task object.
+     */
     private Task parseLineToTask(String data) {
         String[] parts = data.split(" \\| ");
         String taskType = parts[0];
