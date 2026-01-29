@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,12 +38,15 @@ public class Storage {
                 break;
             case "D":
                 String by = parts[3];
-                task = new DeadlinesTask(description, by);
+                LocalDateTime byTime = LocalDateTime.parse(by);
+                task = new DeadlinesTask(description, byTime);
                 break;
             case "E":
                 String from = parts[3];
                 String to = parts[4];
-                task = new EventsTask(description, from, to);
+                LocalDateTime fromTime = LocalDateTime.parse(from);
+                LocalDateTime toTime = LocalDateTime.parse(to);
+                task = new EventsTask(description, fromTime, toTime);
                 break;
             default:
                 return null;
@@ -121,14 +125,13 @@ public class Storage {
                 if (task instanceof ToDosTask) {
                     line += task.toString().substring(8);
                 } else if (task instanceof DeadlinesTask) {
-                    String[] parts = task.toString().substring(8).split(" \\(by: ");
-                    line += parts[0] + " | " 
-                        + parts[1].substring(0, parts[1].length() - 1);
+                    DeadlinesTask deadlineTask = (DeadlinesTask) task;
+                    line += deadlineTask.toString().substring(8).split(" \\(by: ")[0] + " | "
+                        + deadlineTask.getDeadlines().toString();
                 } else if (task instanceof EventsTask) {
-                    String[] parts = task.toString().substring(8).split(" \\(from: ");
-                    String[] timeParts = parts[1].split(" to: ");
-                    line += parts[0] + " | " + timeParts[0] + " | " 
-                        + timeParts[1].substring(0, timeParts[1].length() - 1);
+                    EventsTask eventTask = (EventsTask) task;
+                    line += eventTask.toString().substring(8).split(" \\(from: ")[0] + " | "
+                        + eventTask.getFrom().toString() + " | " + eventTask.getTo().toString();
                 }
 
                 fw.write(line + "\n");
