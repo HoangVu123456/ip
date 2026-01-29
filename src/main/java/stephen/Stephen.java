@@ -1,159 +1,64 @@
 package stephen;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.List;
-
 /**
  * The main class of the Stephen chatbot.
  */
 public class Stephen {
+    private Storage storage;
+    private TaskList tasks;
+    private Ui ui;
+    private Parser parser;
+
+    public Stephen() {
+        ui = new Ui();
+        storage = new Storage();
+        tasks = new TaskList(storage.load());
+        parser = new Parser();
+    }
+
     /**
-     * The main method that runs Stephen chatbot.
+     * Runs the chatbot.
      */
-    public static void main(String[] args) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        List<Task> history = Storage.load();
+    public void run() {
+        ui.showWelcome();
 
-        System.out.println("____________________________________________________________");
-        System.out.println("Hello! I'm Stephen");
-        System.out.println("What can I do for you?");
-        System.out.println("____________________________________________________________");
-
-        while (true) {
+        boolean isExit = false;
+        while (!isExit) {
             try {
-                String input = br.readLine();
+                String input = ui.readCommand();
 
                 if (input == null) {
                     break;
                 }
 
-                Command cmd = Command.command(input);
+                Command cmd = parser.parse(input);
 
                 switch (cmd) {
                 case LIST:
-                    System.out.println("____________________________________________________________");
-                    System.out.println("Here are the tasks in your list:");
-                    if (history.isEmpty()) {
-                        System.out.println("");
-                    } else {
-                        for (int i = 0; i < history.size(); i++) {
-                            System.out.println((i + 1) + ". " + history.get(i).toString());
-                        }
-                    }
-                    System.out.println("____________________________________________________________");
+                    handleList();
                     break;
                 case MARK:
-                    System.out.println("____________________________________________________________");
-                    int markIndex = Integer.parseInt(input.substring(5)) - 1;
-                    if (markIndex < 0 || markIndex >= history.size()) {
-                        throw new InvalidNumberException(
-                            "Invalid or out of bounds task number. Please enter a value between 1 and "
-                                + history.size());
-                    }
-                    history.get(markIndex).mark();
-                    System.out.println("Nice! I've marked this task as done: " + history.get(markIndex).toString());
-                    System.out.println("____________________________________________________________");
-                    Storage.save(history);
+                    handleMark(input);
                     break;
                 case UNMARK:
-                    System.out.println("____________________________________________________________");
-                    int unmarkIndex = Integer.parseInt(input.substring(7)) - 1;
-                    if (unmarkIndex < 0 || unmarkIndex >= history.size()) {
-                        throw new InvalidNumberException(
-                            "Invalid or out of bounds task number. Please enter a value between 1 and "
-                                + history.size());
-                    }
-                    history.get(unmarkIndex).unmark();
-                    System.out.println("OK, I've marked this task as not done yet: " + history.get(unmarkIndex).toString());
-                    System.out.println("____________________________________________________________");
-                    Storage.save(history);
+                    handleUnmark(input);
                     break;
                 case DELETE:
-                    System.out.println("____________________________________________________________");
-                    int deleteIndex = Integer.parseInt(input.substring(7)) - 1;
-                    if (deleteIndex < 0 || deleteIndex >= history.size()) {
-                        throw new InvalidNumberException(
-                            "Invalid or out of bounds task number. Please enter a value between 1 and " 
-                                + history.size());
-                    }
-                    Task removedTask = history.remove(deleteIndex);
-                    System.out.println("Noted. I've removed this task: " + removedTask.toString());
-                    System.out.println("Now you have " + history.size() + " tasks in the list.");
-                    System.out.println("____________________________________________________________");
-                    Storage.save(history);
+                    handleDelete(input);
                     break;
                 case BYE:
-                    System.out.println("____________________________________________________________");
-                    System.out.println("Bye. Hope to see you again soon!");
-                    System.out.println("____________________________________________________________");
-                    br.close();
-                    return;
+                    ui.showGoodbye();
+                    ui.close();
+                    isExit = true;
+                    break;
                 case TODO:
-                    String todoDescription = input.substring(5).trim();
-                    if (todoDescription.isEmpty()) {
-                        throw new EmptyTaskException(
-                            "The description for todo task can not be empty! Please try again!"
-                        );
-                    }
-                    Task todoTask = new ToDosTask(todoDescription);
-                    history.add(todoTask);
-                    System.out.println("____________________________________________________________");
-                    System.out.println("Got it. I've added this task: ");
-                    System.out.println(todoTask.toString());
-                    System.out.println("Now you have " + history.size() + " tasks in the list.");
-                    System.out.println("____________________________________________________________");
-                    Storage.save(history);
+                    handleToDo(input);
                     break;
                 case DEADLINE:
-                    String[] deadlineParts = input.substring(9).split(" /by ");
-                    if (deadlineParts.length != 2) {
-                        throw new WrongFormatException(
-                            "Wrong format for deadline task command! Please use format: deadline <description> /by <time>"
-                        );
-                    }
-                    String deadlineDescription = deadlineParts[0].trim();
-                    String by = deadlineParts[1].trim();
-                    if (deadlineDescription.isEmpty() || by.isEmpty()) {
-                        throw new EmptyTaskException(
-                            "The command is missing essential information. The description and deadline cannot be empty."
-                        );
-                    }
-                    Task deadlineTask = new DeadlinesTask(deadlineDescription, by);
-                    history.add(deadlineTask);
-                    System.out.println("____________________________________________________________");
-                    System.out.println("Got it. I've added this task: ");
-                    System.out.println(deadlineTask.toString());
-                    System.out.println("Now you have " + history.size() + " tasks in the list.");
-                    System.out.println("____________________________________________________________");
-                    Storage.save(history);
+                    handleDeadline(input);
                     break;
                 case EVENT:
-                    String[] eventParts = input.substring(6).split(" /from | /to ");
-                    if (eventParts.length != 3) {
-                        throw new WrongFormatException(
-                            "Wrong format for event task command! "
-                                + "Please use format: event <description> /from <start> /to <end>"
-                        );
-                    }
-                    String eventDescription = eventParts[0].trim();
-                    String from = eventParts[1].trim();
-                    String to = eventParts[2].trim();
-                    if (eventDescription.isEmpty() || from.isEmpty() || to.isEmpty()) {
-                        throw new EmptyTaskException(
-                            "The command is missing essential information. "
-                                + "The description, start time, and end time cannot be empty."
-                        );
-                    }
-                    Task eventTask = new EventsTask(eventDescription, from, to);
-                    history.add(eventTask);
-                    System.out.println("____________________________________________________________");
-                    System.out.println("Got it. I've added this task: ");
-                    System.out.println(eventTask.toString());
-                    System.out.println("Now you have " + history.size() + " tasks in the list.");
-                    System.out.println("____________________________________________________________");
-                    Storage.save(history);
+                    handleEvent(input);
                     break;
                 case UNKNOWN:
                 default:
@@ -162,9 +67,140 @@ public class Stephen {
                     );
                 }
             } catch (Exception e) {
-                System.out.println(e.getMessage());
+                ui.showError(e.getMessage());
             }
         }
-        br.close();
+    }
+
+    private void handleList() {
+        ui.showLine();
+        ui.println("Here are the tasks in your list:");
+        if (tasks.isEmpty()) {
+            ui.println("");
+        } else {
+            for (int i = 0; i < tasks.size(); i++) {
+                ui.println((i + 1) + ". " + tasks.getTask(i).toString());
+            }
+        }
+        ui.showLine();
+    }
+
+    private void handleMark(String input) {
+        ui.showLine();
+        int markIndex = Integer.parseInt(input.substring(5)) - 1;
+        if (markIndex < 0 || markIndex >= tasks.size()) {
+            throw new InvalidNumberException(
+                "Invalid or out of bounds task number. Please enter a value between 1 and "
+                    + tasks.size());
+        }
+        tasks.getTask(markIndex).mark();
+        ui.println("Nice! I've marked this task as done: " + tasks.getTask(markIndex).toString());
+        ui.showLine();
+        storage.save(tasks.getTasks());
+    }
+
+    private void handleUnmark(String input) {
+        ui.showLine();
+        int unmarkIndex = Integer.parseInt(input.substring(7)) - 1;
+        if (unmarkIndex < 0 || unmarkIndex >= tasks.size()) {
+            throw new InvalidNumberException(
+                "Invalid or out of bounds task number. Please enter a value between 1 and "
+                    + tasks.size());
+        }
+        tasks.getTask(unmarkIndex).unmark();
+        ui.println("OK, I've marked this task as not done yet: " + tasks.getTask(unmarkIndex).toString());
+        ui.showLine();
+        storage.save(tasks.getTasks());
+    }
+
+    private void handleDelete(String input) {
+        ui.showLine();
+        int deleteIndex = Integer.parseInt(input.substring(7)) - 1;
+        if (deleteIndex < 0 || deleteIndex >= tasks.size()) {
+            throw new InvalidNumberException(
+                "Invalid or out of bounds task number. Please enter a value between 1 and " 
+                    + tasks.size());
+        }
+        Task removedTask = tasks.deleteTask(deleteIndex);
+        ui.println("Noted. I've removed this task: " + removedTask.toString());
+        ui.println("Now you have " + tasks.size() + " tasks in the list.");
+        ui.showLine();
+        storage.save(tasks.getTasks());
+    }
+
+    private void handleToDo(String input) {
+        String todoDescription = input.substring(5).trim();
+        if (todoDescription.isEmpty()) {
+            throw new EmptyTaskException(
+                "The description for todo task can not be empty! Please try again!"
+            );
+        }
+        Task todoTask = new ToDosTask(todoDescription);
+        tasks.addTask(todoTask);
+        ui.showLine();
+        ui.println("Got it. I've added this task: ");
+        ui.println(todoTask.toString());
+        ui.println("Now you have " + tasks.size() + " tasks in the list.");
+        ui.showLine();
+        storage.save(tasks.getTasks());
+    }
+
+    private void handleDeadline(String input) {
+        String[] deadlineParts = input.substring(9).split(" /by ");
+        if (deadlineParts.length != 2) {
+            throw new WrongFormatException(
+                "Wrong format for deadline task command! Please use format: deadline <description> /by <time>"
+            );
+        }
+        String deadlineDescription = deadlineParts[0].trim();
+        String by = deadlineParts[1].trim();
+        if (deadlineDescription.isEmpty() || by.isEmpty()) {
+            throw new EmptyTaskException(
+                "The command is missing essential information. The description and deadline cannot be empty."
+            );
+        }
+        Task deadlineTask = new DeadlinesTask(deadlineDescription, by);
+        tasks.addTask(deadlineTask);
+        ui.showLine();
+        ui.println("Got it. I've added this task: ");
+        ui.println(deadlineTask.toString());
+        ui.println("Now you have " + tasks.size() + " tasks in the list.");
+        ui.showLine();
+        storage.save(tasks.getTasks());
+    }
+
+    private void handleEvent(String input) {
+        String[] eventParts = input.substring(6).split(" /from | /to ");
+        if (eventParts.length != 3) {
+            throw new WrongFormatException(
+                "Wrong format for event task command! "
+                    + "Please use format: event <description> /from <start> /to <end>"
+            );
+        }
+        String eventDescription = eventParts[0].trim();
+        String from = eventParts[1].trim();
+        String to = eventParts[2].trim();
+        if (eventDescription.isEmpty() || from.isEmpty() || to.isEmpty()) {
+            throw new EmptyTaskException(
+                "The command is missing essential information. "
+                    + "The description, start time, and end time cannot be empty."
+            );
+        }
+        Task eventTask = new EventsTask(eventDescription, from, to);
+        tasks.addTask(eventTask);
+        ui.showLine();
+        ui.println("Got it. I've added this task: ");
+        ui.println(eventTask.toString());
+        ui.println("Now you have " + tasks.size() + " tasks in the list.");
+        ui.showLine();
+        storage.save(tasks.getTasks());
+    }
+
+    /**
+     * The main method that runs Stephen chatbot.
+     */
+    public static void main(String[] args) {
+        Stephen stephen = new Stephen();
+        stephen.run();
     }
 }
