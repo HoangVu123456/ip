@@ -1,7 +1,7 @@
 package stephen;
 
 /**
- * Class representing a to-do task.
+ * Represents a to-do task.
  */
 public class ToDosTask extends Task {
     public ToDosTask(String description) {

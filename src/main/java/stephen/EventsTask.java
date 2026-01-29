@@ -3,7 +3,7 @@ package stephen;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 /**
- * Class representing an event task.
+ * Represents an events task.
  */
 public class EventsTask extends Task {
     private LocalDateTime from;

@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Class represents a storage handler for loading and saving chat history.
+ * Represents a storage handler for loading and saving chat history.
  */
 public class Storage {
     private static final String FILE_PATH = "./data/chat_history_data.txt";
@@ -94,7 +94,7 @@ public class Storage {
     }
 
     /**
-     * Saves and write the chat history to the local storage file.
+     * Saves and writes the chat history to the local storage file.
      */
     public void save(List<Task> history) {
         try {

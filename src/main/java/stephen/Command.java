@@ -1,8 +1,7 @@
 package stephen;
 
 /**
- * Enum representing different commands that can be
- * used to communicate with the chatbot.
+ * Represents different commands that can be used to communicate with the chatbot.
  */
 public enum Command {
     LIST, MARK, UNMARK, DELETE, TODO, DEADLINE, EVENT, FIND, BYE, UNKNOWN;

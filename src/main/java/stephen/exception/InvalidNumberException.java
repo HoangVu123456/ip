@@ -1,7 +1,7 @@
 package stephen.exception;
 
 /**
- * Exception thrown when the number provided is invalid or out of bounds.
+ * Throws an exception when the input value is invalid.
  */
 public class InvalidNumberException extends RuntimeException {
     public InvalidNumberException(String message) {

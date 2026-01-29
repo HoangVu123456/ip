@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 /**
- * Class handling the user interface for client interactions.
+ * Handles the user interface for client interactions.
  */
 public class Ui {
     private BufferedReader reader;
@@ -55,7 +55,7 @@ public class Ui {
     }
 
     /**
-     * Show an error message to the user.
+     * Shows an error message to the user.
      */
     public void showError(String message) {
         println(message);

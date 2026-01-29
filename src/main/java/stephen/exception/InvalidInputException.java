@@ -1,7 +1,7 @@
 package stephen.exception;
 
 /**
- * Exception thrown when the command input is invalid.
+ * Throws an exception when the input is invalid.
  */
 public class InvalidInputException extends RuntimeException {
     public InvalidInputException(String message) {
