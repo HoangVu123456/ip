@@ -36,23 +36,23 @@ public class Storage {
         }
 
         switch (taskType) {
-            case "T":
-                task = new ToDosTask(description);
-                break;
-            case "D":
-                String by = parts[3];
-                LocalDateTime byTime = LocalDateTime.parse(by);
-                task = new DeadlinesTask(description, byTime);
-                break;
-            case "E":
-                String from = parts[3];
-                String to = parts[4];
-                LocalDateTime fromTime = LocalDateTime.parse(from);
-                LocalDateTime toTime = LocalDateTime.parse(to);
-                task = new EventsTask(description, fromTime, toTime);
-                break;
-            default:
-                return null;
+        case "T":
+            task = new ToDosTask(description);
+            break;
+        case "D":
+            String by = parts[3];
+            LocalDateTime byTime = LocalDateTime.parse(by);
+            task = new DeadlinesTask(description, byTime);
+            break;
+        case "E":
+            String from = parts[3];
+            String to = parts[4];
+            LocalDateTime fromTime = LocalDateTime.parse(from);
+            LocalDateTime toTime = LocalDateTime.parse(to);
+            task = new EventsTask(description, fromTime, toTime);
+            break;
+        default:
+            return null;
         }
 
         if (task != null && isDone == true) {
@@ -85,7 +85,6 @@ public class Storage {
                     history.add(task);
                 }
             }
-            
             br.close();
         } catch (IOException e) {
             System.out.println(e.getMessage());
@@ -99,7 +98,6 @@ public class Storage {
     public void save(List<Task> history) {
         try {
             File directory = new File("./data");
-            
             if (directory.exists() == false) {
                 directory.mkdir();
             }

@@ -3,6 +3,7 @@ package stephen;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import org.junit.jupiter.api.Test;
 
 /**
@@ -26,7 +27,6 @@ public class TaskListTest {
     public void testAddTask() {
         TaskList taskList = new TaskList();
         Task task1 = new Task("Play football");
-        
         taskList.addTask(task1);
         assertFalse(taskList.isEmpty());
         assertEquals(1, taskList.size());
@@ -41,10 +41,8 @@ public class TaskListTest {
         TaskList taskList = new TaskList();
         Task task1 = new Task("Play football");
         Task task2 = new Task("Play video games");
-        
         taskList.addTask(task1);
         taskList.addTask(task2);
-        
         assertEquals(2, taskList.size());
         assertEquals(task1, taskList.getTask(0));
         assertEquals(task2, taskList.getTask(1));
@@ -58,10 +56,8 @@ public class TaskListTest {
         TaskList taskList = new TaskList();
         Task task1 = new Task("Play football");
         Task task2 = new Task("Play video games");
-        
         taskList.addTask(task1);
         taskList.addTask(task2);
-        
         Task deleted = taskList.deleteTask(0);
         assertEquals(task1, deleted);
         assertEquals(1, taskList.size());
@@ -75,10 +71,8 @@ public class TaskListTest {
     public void testDeleteLastTask() {
         TaskList taskList = new TaskList();
         Task task1 = new Task("Play football");
-        
         taskList.addTask(task1);
         taskList.deleteTask(0);
-        
         assertTrue(taskList.isEmpty());
         assertEquals(0, taskList.size());
     }
@@ -91,13 +85,10 @@ public class TaskListTest {
         TaskList taskList = new TaskList();
         Task task1 = new Task("Play football");
         Task task2 = new Task("Play video games");
-        
         taskList.addTask(task1);
         taskList.addTask(task2);
-        
         Task retrieved1 = taskList.getTask(0);
         Task retrieved2 = taskList.getTask(1);
-        
         assertEquals(task1, retrieved1);
         assertEquals(task2, retrieved2);
     }
@@ -110,15 +101,11 @@ public class TaskListTest {
         TaskList taskList = new TaskList();
         Task task1 = new Task("Play football");
         Task task2 = new Task("Play video games");
-        
         assertEquals(0, taskList.size());
-        
         taskList.addTask(task1);
         assertEquals(1, taskList.size());
-        
         taskList.addTask(task2);
         assertEquals(2, taskList.size());
-        
         taskList.deleteTask(0);
         assertEquals(1, taskList.size());
     }
@@ -131,10 +118,8 @@ public class TaskListTest {
         TaskList taskList = new TaskList();
         Task task1 = new Task("Play football");
         Task task2 = new Task("Play video games");
-        
         taskList.addTask(task1);
         taskList.addTask(task2);
-        
         assertEquals(2, taskList.getTasks().size());
         assertEquals(task1, taskList.getTasks().get(0));
         assertEquals(task2, taskList.getTasks().get(1));

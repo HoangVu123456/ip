@@ -9,11 +9,17 @@ import java.time.format.DateTimeFormatter;
 public class DeadlinesTask extends Task {
     private LocalDateTime deadlines;
 
+    /**
+     * Constructor for DeadlineTask.
+     */
     public DeadlinesTask(String description, String deadlines) {
         super(description);
         this.deadlines = LocalDateTime.parse(deadlines, DateTimeFormatter.ofPattern("d/M/yyyy HHmm"));
     }
 
+    /**
+     * Overloaded constructor for DeadlineTask.
+     */
     public DeadlinesTask(String description, LocalDateTime deadlines) {
         super(description);
         this.deadlines = deadlines;

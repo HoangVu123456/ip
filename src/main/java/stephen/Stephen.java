@@ -14,6 +14,9 @@ public class Stephen {
     private Ui ui;
     private Parser parser;
 
+    /**
+     * Constructor for Stephen chatbot.
+     */
     public Stephen() {
         ui = new Ui();
         storage = new Storage();
@@ -138,7 +141,7 @@ public class Stephen {
         int deleteIndex = Integer.parseInt(input.substring(7)) - 1;
         if (deleteIndex < 0 || deleteIndex >= tasks.size()) {
             throw new InvalidNumberException(
-                "Invalid or out of bounds task number. Please enter a value between 1 and " 
+                "Invalid or out of bounds task number. Please enter a value between 1 and "
                         + tasks.size());
         }
         Task removedTask = tasks.deleteTask(deleteIndex);
@@ -235,10 +238,8 @@ public class Stephen {
                 "The search keyword cannot be empty! Please provide a keyword."
             );
         }
-        
         ui.showLine();
         ui.println("Here are the matching tasks in your list:");
-        
         int matchCount = 0;
         for (int i = 0; i < tasks.size(); i++) {
             Task task = tasks.getTask(i);
@@ -247,11 +248,9 @@ public class Stephen {
                 ui.println(matchCount + "." + task.toString());
             }
         }
-        
         if (matchCount == 0) {
             ui.println("You have no matching tasks in your list.");
         }
-        
         ui.showLine();
     }
 
