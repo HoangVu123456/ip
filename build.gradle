@@ -2,6 +2,7 @@ plugins {
     id 'java'
     id 'application'
     id 'com.gradleup.shadow' version '9.3.1'
+    id 'checkstyle'
 }
 
 repositories {
@@ -40,4 +41,8 @@ run {
 
 shadowJar {
     archiveFileName = 'stephen.jar'
+}
+
+checkstyle {
+    toolVersion = '11.0.0'
 }

@@ -6,7 +6,10 @@ package stephen;
 public class Task {
     private String description;
     private boolean isDone;
-    
+
+    /**
+     * Constructor for Task.
+     */
     public Task(String description) {
         this.description = description;
         this.isDone = false;

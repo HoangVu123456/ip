@@ -3,6 +3,7 @@ package stephen;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import org.junit.jupiter.api.Test;
 
 /**
@@ -38,7 +39,6 @@ public class TaskTest {
         Task task = new Task("Watch a movie");
         task.mark();
         assertTrue(task.isDone());
-        
         task.unmark();
         assertFalse(task.isDone());
         assertEquals("[ ] Watch a movie", task.toString());
@@ -51,13 +51,10 @@ public class TaskTest {
     public void testMarkAndUnmarkCycle() {
         Task task = new Task("Watch a movie");
         assertFalse(task.isDone());
-        
         task.mark();
         assertTrue(task.isDone());
-        
         task.unmark();
         assertFalse(task.isDone());
-        
         task.mark();
         assertTrue(task.isDone());
     }
@@ -69,7 +66,6 @@ public class TaskTest {
     public void testToStringFormat() {
         Task task = new Task("Watch a movie");
         assertEquals("[ ] Watch a movie", task.toString());
-        
         task.mark();
         assertEquals("[X] Watch a movie", task.toString());
     }
