@@ -35,7 +35,7 @@ public class EventsTask extends Task {
         return this.to;
     }
 
-    /** 
+    /**
      * Returns the storage representation for the events task.
      */
     @Override
