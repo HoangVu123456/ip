@@ -19,7 +19,7 @@ public class Task {
         return this.isDone;
     }
 
-    public String getDesScription() {
+    public String getDescription() {
         return this.description;
     }
 

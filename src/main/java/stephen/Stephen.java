@@ -6,104 +6,75 @@ import stephen.exception.InvalidNumberException;
 import stephen.exception.WrongFormatException;
 
 /**
- * Runs the Stephen chatbot.
+ * Represents the Stephen chatbot.
  */
 public class Stephen {
     private Storage storage;
     private TaskList tasks;
-    private Ui ui;
     private Parser parser;
 
     /**
      * Constructor for Stephen chatbot.
      */
     public Stephen() {
-        ui = new Ui();
         storage = new Storage();
         tasks = new TaskList(storage.load());
         parser = new Parser();
     }
 
     /**
-     * Runs the chatbot.
+     * Get response from Stephen chatbot.
      */
-    public void run() {
-        ui.showWelcome();
-
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String input = ui.readCommand();
-
-                if (input == null) {
-                    break;
-                }
-
-                Command cmd = parser.parse(input);
-
-                switch (cmd) {
-                case LIST:
-                    handleList();
-                    break;
-                case MARK:
-                    handleMark(input);
-                    break;
-                case UNMARK:
-                    handleUnmark(input);
-                    break;
-                case DELETE:
-                    handleDelete(input);
-                    break;
-                case BYE:
-                    ui.showGoodbye();
-                    ui.close();
-                    isExit = true;
-                    break;
-                case TODO:
-                    handleToDo(input);
-                    break;
-                case DEADLINE:
-                    handleDeadline(input);
-                    break;
-                case EVENT:
-                    handleEvent(input);
-                    break;
-                case FIND:
-                    handleFind(input);
-                    break;
-                case UNKNOWN:
-                default:
-                    throw new InvalidInputException(
-                        "Invalid input! I'm sorry, but I don't know what that means"
-                    );
-                }
-            } catch (Exception e) {
-                ui.showError(e.getMessage());
+    public String getResponse(String input) {
+        try {
+            Command cmd = parser.parse(input);
+            switch (cmd) {
+            case LIST:
+                return getListString();
+            case MARK:
+                return getMarkString(input);
+            case UNMARK:
+                return getUnmarkString(input);
+            case DELETE:
+                return getDeleteString(input);
+            case BYE:
+                return "Bye. Hope to see you again soon!";
+            case TODO:
+                return getTodoString(input);
+            case DEADLINE:
+                return getDeadlineString(input);
+            case EVENT:
+                return getEventString(input);
+            case FIND:
+                return getFindString(input);
+            case UNKNOWN:
+            default:
+                throw new InvalidInputException(
+                    "Invalid input! I'm sorry, but I don't know what that means"
+                );
             }
+        } catch (Exception e) {
+            return e.getMessage();
         }
     }
-
     /**
-     * Handles the 'list' command.
+     * Gets the string representation to the response for list command.
      */
-    private void handleList() {
-        ui.showLine();
-        ui.println("Here are the tasks in your list:");
+    private String getListString() {
+        StringBuilder sb = new StringBuilder("Here are the tasks in your list:");
         if (tasks.isEmpty()) {
-            ui.println("");
+            sb.append("\n");
         } else {
             for (int i = 0; i < tasks.size(); i++) {
-                ui.println((i + 1) + ". " + tasks.getTask(i).toString());
+                sb.append("\n").append(i + 1).append(". ").append(tasks.getTask(i).toString());
             }
         }
-        ui.showLine();
+        return sb.toString();
     }
-
     /**
-     * Handles the 'mark' command.
+     * Gets the string representation to the response for mark command.
      */
-    private void handleMark(String input) {
-        ui.showLine();
+    private String getMarkString(String input) {
         int markIndex = Integer.parseInt(input.substring(5)) - 1;
         if (markIndex < 0 || markIndex >= tasks.size()) {
             throw new InvalidNumberException(
@@ -111,16 +82,13 @@ public class Stephen {
                         + tasks.size());
         }
         tasks.getTask(markIndex).mark();
-        ui.println("Nice! I've marked this task as done: " + tasks.getTask(markIndex).toString());
-        ui.showLine();
         storage.save(tasks.getTasks());
+        return "Nice! I've marked this task as done: " + tasks.getTask(markIndex).toString();
     }
-
     /**
-     * Handles the 'unmark' command.
+     * Gets the string representation to the response for unmark command.
      */
-    private void handleUnmark(String input) {
-        ui.showLine();
+    private String getUnmarkString(String input) {
         int unmarkIndex = Integer.parseInt(input.substring(7)) - 1;
         if (unmarkIndex < 0 || unmarkIndex >= tasks.size()) {
             throw new InvalidNumberException(
@@ -128,16 +96,13 @@ public class Stephen {
                         + tasks.size());
         }
         tasks.getTask(unmarkIndex).unmark();
-        ui.println("OK, I've marked this task as not done yet: " + tasks.getTask(unmarkIndex).toString());
-        ui.showLine();
         storage.save(tasks.getTasks());
+        return "OK, I've marked this task as not done yet: " + tasks.getTask(unmarkIndex).toString();
     }
-
     /**
-     * Handles the 'delete' command.
+     * Gets the string representation to the response for delete command.
      */
-    private void handleDelete(String input) {
-        ui.showLine();
+    private String getDeleteString(String input) {
         int deleteIndex = Integer.parseInt(input.substring(7)) - 1;
         if (deleteIndex < 0 || deleteIndex >= tasks.size()) {
             throw new InvalidNumberException(
@@ -145,16 +110,14 @@ public class Stephen {
                         + tasks.size());
         }
         Task removedTask = tasks.deleteTask(deleteIndex);
-        ui.println("Noted. I've removed this task: " + removedTask.toString());
-        ui.println("Now you have " + tasks.size() + " tasks in the list.");
-        ui.showLine();
         storage.save(tasks.getTasks());
+        return "Noted. I've removed this task: " + removedTask.toString()
+                + "\nNow you have " + tasks.size() + " tasks in the list.";
     }
-
     /**
-     * Handles the 'todo' command.
+     * Gets the string representation to the response for todo command.
      */
-    private void handleToDo(String input) {
+    private String getTodoString(String input) {
         String todoDescription = input.substring(5).trim();
         if (todoDescription.isEmpty()) {
             throw new EmptyTaskException(
@@ -163,18 +126,14 @@ public class Stephen {
         }
         Task todoTask = new ToDosTask(todoDescription);
         tasks.addTask(todoTask);
-        ui.showLine();
-        ui.println("Got it. I've added this task: ");
-        ui.println(todoTask.toString());
-        ui.println("Now you have " + tasks.size() + " tasks in the list.");
-        ui.showLine();
         storage.save(tasks.getTasks());
+        return "Got it. I've added this task:\n " + todoTask.toString()
+                + "\nNow you have " + tasks.size() + " tasks in the list.";
     }
-
     /**
-     * Handles the 'deadline' command.
+     * Gets the string representation to the response for deadline command.
      */
-    private void handleDeadline(String input) {
+    private String getDeadlineString(String input) {
         String[] deadlineParts = input.substring(9).split(" /by ");
         if (deadlineParts.length != 2) {
             throw new WrongFormatException(
@@ -190,23 +149,18 @@ public class Stephen {
         }
         Task deadlineTask = new DeadlinesTask(deadlineDescription, by);
         tasks.addTask(deadlineTask);
-        ui.showLine();
-        ui.println("Got it. I've added this task: ");
-        ui.println(deadlineTask.toString());
-        ui.println("Now you have " + tasks.size() + " tasks in the list.");
-        ui.showLine();
         storage.save(tasks.getTasks());
+        return "Got it. I've added this task:\n " + deadlineTask.toString()
+                + "\nNow you have " + tasks.size() + " tasks in the list.";
     }
-
     /**
-     * Handles the 'event' command.
+     * Gets the string representation to the response for event command.
      */
-    private void handleEvent(String input) {
+    private String getEventString(String input) {
         String[] eventParts = input.substring(6).split(" /from | /to ");
         if (eventParts.length != 3) {
             throw new WrongFormatException(
-                "Wrong format for event task command! "
-                        + "Please use format: event <description> /from <start> /to <end>"
+                "Wrong format for event task command! Please use format: event <description> /from <start> /to <end>"
             );
         }
         String eventDescription = eventParts[0].trim();
@@ -214,51 +168,38 @@ public class Stephen {
         String to = eventParts[2].trim();
         if (eventDescription.isEmpty() || from.isEmpty() || to.isEmpty()) {
             throw new EmptyTaskException(
-                "The command is missing essential information. "
-                        + "The description, start time, and end time cannot be empty."
+                "The command is missing essential information."
+                        + " The description, start time, and end time cannot be empty."
             );
         }
         Task eventTask = new EventsTask(eventDescription, from, to);
         tasks.addTask(eventTask);
-        ui.showLine();
-        ui.println("Got it. I've added this task: ");
-        ui.println(eventTask.toString());
-        ui.println("Now you have " + tasks.size() + " tasks in the list.");
-        ui.showLine();
         storage.save(tasks.getTasks());
+        return "Got it. I've added this task:\n " + eventTask.toString()
+                + "\nNow you have " + tasks.size() + " tasks in the list.";
     }
-
     /**
-     * Handles the find command
+     * Gets the string representation to the response for find command.
      */
-    private void handleFind(String input) {
+    private String getFindString(String input) {
         String keyword = input.substring(5).trim();
         if (keyword.isEmpty()) {
             throw new EmptyTaskException(
                 "The search keyword cannot be empty! Please provide a keyword."
             );
         }
-        ui.showLine();
-        ui.println("Here are the matching tasks in your list:");
+        StringBuilder sb = new StringBuilder("Here are the matching tasks in your list:");
         int matchCount = 0;
         for (int i = 0; i < tasks.size(); i++) {
             Task task = tasks.getTask(i);
-            if (task.getDesScription().contains(keyword)) {
+            if (task.getDescription().contains(keyword)) {
                 matchCount++;
-                ui.println(matchCount + "." + task.toString());
+                sb.append("\n").append(matchCount).append(". ").append(task.toString());
             }
         }
         if (matchCount == 0) {
-            ui.println("You have no matching tasks in your list.");
+            sb.append("\nYou have no matching tasks in your list.");
         }
-        ui.showLine();
-    }
-
-    /**
-     * Runs the whole program.
-     */
-    public static void main(String[] args) {
-        Stephen stephen = new Stephen();
-        stephen.run();
+        return sb.toString();
     }
 }
