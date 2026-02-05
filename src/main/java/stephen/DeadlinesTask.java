@@ -29,6 +29,15 @@ public class DeadlinesTask extends Task {
         return this.deadlines;
     }
 
+    /**
+     * Returns the storage representation for the deadline task.
+     */
+    @Override
+    public String toStorageString() {
+        return "D | " + (isDone() ? "1" : "0") + " | " + getDescription()
+                + " | " + deadlines.toString();
+    }
+
     @Override
     public String toString() {
         DateTimeFormatter outputformatter = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");

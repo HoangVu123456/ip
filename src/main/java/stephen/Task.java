@@ -3,7 +3,7 @@ package stephen;
 /**
  * Represents a generic task.
  */
-public class Task {
+public abstract class Task {
     private String description;
     private boolean isDone;
 
@@ -36,6 +36,11 @@ public class Task {
     public void unmark() {
         this.isDone = false;
     }
+
+    /**
+     * Returns the storage representation for this task.
+     */
+    public abstract String toStorageString();
 
     @Override
     public String toString() {

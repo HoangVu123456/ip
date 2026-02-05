@@ -35,6 +35,15 @@ public class EventsTask extends Task {
         return this.to;
     }
 
+    /** 
+     * Returns the storage representation for the events task.
+     */
+    @Override
+    public String toStorageString() {
+        return "E | " + (isDone() ? "1" : "0") + " | " + getDescription()
+                + " | " + from.toString() + " | " + to.toString();
+    }
+
     @Override
     public String toString() {
         DateTimeFormatter outputformatter = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
