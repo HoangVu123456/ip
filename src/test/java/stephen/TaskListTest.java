@@ -26,7 +26,7 @@ public class TaskListTest {
     @Test
     public void testAddTask() {
         TaskList taskList = new TaskList();
-        Task task1 = new Task("Play football");
+        Task task1 = new ToDosTask("Play football");
         taskList.addTask(task1);
         assertFalse(taskList.isEmpty());
         assertEquals(1, taskList.size());
@@ -39,8 +39,8 @@ public class TaskListTest {
     @Test
     public void testAddMultipleTasks() {
         TaskList taskList = new TaskList();
-        Task task1 = new Task("Play football");
-        Task task2 = new Task("Play video games");
+        Task task1 = new ToDosTask("Play football");
+        Task task2 = new ToDosTask("Play video games");
         taskList.addTask(task1);
         taskList.addTask(task2);
         assertEquals(2, taskList.size());
@@ -54,8 +54,8 @@ public class TaskListTest {
     @Test
     public void testDeleteTask() {
         TaskList taskList = new TaskList();
-        Task task1 = new Task("Play football");
-        Task task2 = new Task("Play video games");
+        Task task1 = new ToDosTask("Play football");
+        Task task2 = new ToDosTask("Play video games");
         taskList.addTask(task1);
         taskList.addTask(task2);
         Task deleted = taskList.deleteTask(0);
@@ -70,7 +70,7 @@ public class TaskListTest {
     @Test
     public void testDeleteLastTask() {
         TaskList taskList = new TaskList();
-        Task task1 = new Task("Play football");
+        Task task1 = new ToDosTask("Play football");
         taskList.addTask(task1);
         taskList.deleteTask(0);
         assertTrue(taskList.isEmpty());
@@ -83,8 +83,8 @@ public class TaskListTest {
     @Test
     public void testGetTask() {
         TaskList taskList = new TaskList();
-        Task task1 = new Task("Play football");
-        Task task2 = new Task("Play video games");
+        Task task1 = new ToDosTask("Play football");
+        Task task2 = new ToDosTask("Play video games");
         taskList.addTask(task1);
         taskList.addTask(task2);
         Task retrieved1 = taskList.getTask(0);
@@ -99,8 +99,8 @@ public class TaskListTest {
     @Test
     public void testSize() {
         TaskList taskList = new TaskList();
-        Task task1 = new Task("Play football");
-        Task task2 = new Task("Play video games");
+        Task task1 = new ToDosTask("Play football");
+        Task task2 = new ToDosTask("Play video games");
         assertEquals(0, taskList.size());
         taskList.addTask(task1);
         assertEquals(1, taskList.size());
@@ -116,8 +116,8 @@ public class TaskListTest {
     @Test
     public void testGetTasks() {
         TaskList taskList = new TaskList();
-        Task task1 = new Task("Play football");
-        Task task2 = new Task("Play video games");
+        Task task1 = new ToDosTask("Play football");
+        Task task2 = new ToDosTask("Play video games");
         taskList.addTask(task1);
         taskList.addTask(task2);
         assertEquals(2, taskList.getTasks().size());

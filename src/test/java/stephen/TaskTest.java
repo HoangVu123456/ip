@@ -15,9 +15,9 @@ public class TaskTest {
      */
     @Test
     public void testTaskInitialization() {
-        Task task = new Task("Watch a movie");
+        Task task = new ToDosTask("Watch a movie");
         assertFalse(task.isDone());
-        assertEquals("[ ] Watch a movie", task.toString());
+        assertEquals("[T] [ ] Watch a movie", task.toString());
     }
 
     /**
@@ -25,10 +25,10 @@ public class TaskTest {
      */
     @Test
     public void testMark() {
-        Task task = new Task("Watch a movie");
+        Task task = new ToDosTask("Watch a movie");
         task.mark();
         assertTrue(task.isDone());
-        assertEquals("[X] Watch a movie", task.toString());
+        assertEquals("[T] [X] Watch a movie", task.toString());
     }
 
     /**
@@ -36,12 +36,12 @@ public class TaskTest {
      */
     @Test
     public void testUnmark() {
-        Task task = new Task("Watch a movie");
+        Task task = new ToDosTask("Watch a movie");
         task.mark();
         assertTrue(task.isDone());
         task.unmark();
         assertFalse(task.isDone());
-        assertEquals("[ ] Watch a movie", task.toString());
+        assertEquals("[T] [ ] Watch a movie", task.toString());
     }
 
     /**
@@ -49,7 +49,7 @@ public class TaskTest {
      */
     @Test
     public void testMarkAndUnmarkCycle() {
-        Task task = new Task("Watch a movie");
+        Task task = new ToDosTask("Watch a movie");
         assertFalse(task.isDone());
         task.mark();
         assertTrue(task.isDone());
@@ -64,9 +64,9 @@ public class TaskTest {
      */
     @Test
     public void testToStringFormat() {
-        Task task = new Task("Watch a movie");
-        assertEquals("[ ] Watch a movie", task.toString());
+        Task task = new ToDosTask("Watch a movie");
+        assertEquals("[T] [ ] Watch a movie", task.toString());
         task.mark();
-        assertEquals("[X] Watch a movie", task.toString());
+        assertEquals("[T] [X] Watch a movie", task.toString());
     }
 }

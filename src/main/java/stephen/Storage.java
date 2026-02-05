@@ -106,36 +106,7 @@ public class Storage {
 
             for (int i = 0; i < history.size(); i++) {
                 Task task = history.get(i);
-                boolean isDone = task.isDone();
-                String line = "";
-
-                if (task instanceof ToDosTask) {
-                    line += "T | ";
-                } else if (task instanceof DeadlinesTask) {
-                    line += "D | ";
-                } else if (task instanceof EventsTask) {
-                    line += "E | ";
-                }
-
-                if (isDone) {
-                    line += "1 | ";
-                } else {
-                    line += "0 | ";
-                }
-
-                if (task instanceof ToDosTask) {
-                    line += task.toString().substring(8);
-                } else if (task instanceof DeadlinesTask) {
-                    DeadlinesTask deadlineTask = (DeadlinesTask) task;
-                    line += deadlineTask.toString().substring(8).split(" \\(by: ")[0] + " | "
-                        + deadlineTask.getDeadlines().toString();
-                } else if (task instanceof EventsTask) {
-                    EventsTask eventTask = (EventsTask) task;
-                    line += eventTask.toString().substring(8).split(" \\(from: ")[0] + " | "
-                        + eventTask.getFrom().toString() + " | " + eventTask.getTo().toString();
-                }
-
-                fw.write(line + "\n");
+                fw.write(task.toStorageString() + "\n");
             }
 
             fw.close();
