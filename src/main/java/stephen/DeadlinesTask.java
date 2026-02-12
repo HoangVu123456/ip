@@ -14,6 +14,7 @@ public class DeadlinesTask extends Task {
      */
     public DeadlinesTask(String description, String deadlines) {
         super(description);
+        assert deadlines != null : "Deadline time should not be null";
         this.deadlines = LocalDateTime.parse(deadlines, DateTimeFormatter.ofPattern("d/M/yyyy HHmm"));
     }
 
@@ -22,6 +23,7 @@ public class DeadlinesTask extends Task {
      */
     public DeadlinesTask(String description, LocalDateTime deadlines) {
         super(description);
+        assert deadlines != null : "Deadline time should not be null";
         this.deadlines = deadlines;
     }
 

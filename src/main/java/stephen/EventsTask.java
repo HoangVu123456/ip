@@ -14,8 +14,11 @@ public class EventsTask extends Task {
      */
     public EventsTask(String description, String from, String to) {
         super(description);
+        assert from != null : "Event start time should not be null";
+        assert to != null : "Event end time should not be null";
         this.from = LocalDateTime.parse(from, DateTimeFormatter.ofPattern("d/M/yyyy HHmm"));
         this.to = LocalDateTime.parse(to, DateTimeFormatter.ofPattern("d/M/yyyy HHmm"));
+        assert !this.from.isAfter(this.to) : "Event end time should be after start time";
     }
 
     /**
@@ -23,6 +26,9 @@ public class EventsTask extends Task {
      */
     public EventsTask(String description, LocalDateTime from, LocalDateTime to) {
         super(description);
+        assert from != null : "Event start time should not be null";
+        assert to != null : "Event end time should not be null";
+        assert !from.isAfter(to) : "Event end time should be after start time";
         this.from = from;
         this.to = to;
     }
