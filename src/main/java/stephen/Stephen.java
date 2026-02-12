@@ -1,5 +1,8 @@
 package stephen;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import stephen.exception.EmptyTaskException;
 import stephen.exception.InvalidInputException;
 import stephen.exception.InvalidNumberException;
@@ -188,17 +191,16 @@ public class Stephen {
                 "The search keyword cannot be empty! Please provide a keyword."
             );
         }
+        List<Task> matches = tasks.getTasks().stream()
+                .filter(task -> task.getDescription().contains(keyword))
+                .collect(Collectors.toList());
         StringBuilder sb = new StringBuilder("Here are the matching tasks in your list:");
-        int matchCount = 0;
-        for (int i = 0; i < tasks.size(); i++) {
-            Task task = tasks.getTask(i);
-            if (task.getDescription().contains(keyword)) {
-                matchCount++;
-                sb.append("\n").append(matchCount).append(". ").append(task.toString());
-            }
-        }
-        if (matchCount == 0) {
+        if (matches.isEmpty()) {
             sb.append("\nYou have no matching tasks in your list.");
+        } else {
+            for (int i = 0; i < matches.size(); i++) {
+                sb.append("\n").append(i + 1).append(". ").append(matches.get(i).toString());
+            }
         }
         return sb.toString();
     }
