@@ -16,8 +16,8 @@ public class EventsTask extends Task {
         super(description);
         assert from != null : "Event start time should not be null";
         assert to != null : "Event end time should not be null";
-        this.from = LocalDateTime.parse(from, DateTimeFormatter.ofPattern("d/M/yyyy HHmm"));
-        this.to = LocalDateTime.parse(to, DateTimeFormatter.ofPattern("d/M/yyyy HHmm"));
+        this.from = DateParser.parseDate(from, null);
+        this.to = DateParser.parseDate(to, null);
         assert !this.from.isAfter(this.to) : "Event end time should be after start time";
     }
 
