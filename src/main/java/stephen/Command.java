@@ -10,6 +10,7 @@ public enum Command {
      * Returns the Command enum corresponding to what the user input.
      */
     public static Command command(String input) {
+        assert input != null : "Command input should not be null";
         if (input.equals("list")) {
             return LIST;
         } else if (input.startsWith("mark ")) {

@@ -55,6 +55,7 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     private void handleUserInput() {
+        assert stephen != null : "Stephen instance should be set before handling input";
         String input = userInput.getText();
         String response = stephen.getResponse(input);
         dialogContainer.getChildren().addAll(
