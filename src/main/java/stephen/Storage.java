@@ -55,7 +55,7 @@ public class Storage {
             return null;
         }
 
-        if (task != null && isDone == true) {
+        if (task != null && isDone) {
             task.mark();
         } else {
             task.unmark();
@@ -98,7 +98,7 @@ public class Storage {
     public void save(List<Task> history) {
         try {
             File directory = new File("./data");
-            if (directory.exists() == false) {
+            if (!directory.exists()) {
                 directory.mkdir();
             }
 
