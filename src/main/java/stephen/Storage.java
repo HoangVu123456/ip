@@ -21,7 +21,6 @@ public class Storage {
      * Parses a line from the storage file into a Task object.
      */
     private Task parseLineToTask(String data) {
-        assert data != null : "Storage line should not be null";
         String[] parts = data.split(" \\| ");
         assert parts.length >= 3 : "Storage line should have at least 3 parts";
         String taskType = parts[0];
@@ -39,13 +38,13 @@ public class Storage {
             task = new ToDosTask(description);
             break;
         case "D":
-            assert parts.length >= 4 : "Deadline task should have by time";
+            assert parts.length >= 4 : "Deadline task should have by time part";
             String by = parts[3];
             LocalDateTime byTime = LocalDateTime.parse(by);
             task = new DeadlinesTask(description, byTime);
             break;
         case "E":
-            assert parts.length >= 5 : "Event task should have from/to time";
+            assert parts.length >= 5 : "Event task should have from/to time parts";
             String from = parts[3];
             String to = parts[4];
             LocalDateTime fromTime = LocalDateTime.parse(from);

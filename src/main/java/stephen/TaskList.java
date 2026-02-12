@@ -22,7 +22,6 @@ public class TaskList {
      * Adds a task to the list.
      */
     public void addTask(Task task) {
-        assert task != null : "Task to add should not be null";
         tasks.add(task);
     }
 
@@ -30,7 +29,7 @@ public class TaskList {
      * Deletes a task from the list.
      */
     public Task deleteTask(int index) {
-        assert index >= 0 && index < tasks.size() : "Delete index should be in range";
+        assert index >= 0 && index < tasks.size() : "Delete index should be a valid integer in range";
         return tasks.remove(index);
     }
 
@@ -38,7 +37,7 @@ public class TaskList {
      * Gets a specific task from the list by the index.
      */
     public Task getTask(int index) {
-        assert index >= 0 && index < tasks.size() : "Get index should be in range";
+        assert index >= 0 && index < tasks.size() : "Get index should be a valid integer in range";
         return tasks.get(index);
     }
 
