@@ -2,9 +2,14 @@ package stephen;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.time.LocalDateTime;
+
 import org.junit.jupiter.api.Test;
+
+import stephen.exception.TaskAlreadyInStateException;
 
 /**
  * Unit tests for the Task class.
@@ -68,5 +73,46 @@ public class TaskTest {
         assertEquals("[T] [ ] Watch a movie", task.toString());
         task.mark();
         assertEquals("[T] [X] Watch a movie", task.toString());
+    }
+
+    /**
+     * Test for state exceptions when marking/unmarking.
+     */
+    @Test
+    public void testMarkUnmarkStateExceptions() {
+        Task task = new ToDosTask("Play games");
+        assertThrows(TaskAlreadyInStateException.class, task::unmark);
+        task.mark();
+        assertThrows(TaskAlreadyInStateException.class, task::mark);
+    }
+
+    /**
+     * Test for todo string format.
+     */
+    @Test
+    public void testTodoToString() {
+        Task todo = new ToDosTask("Watch a movie");
+        assertEquals("[T] [ ] Watch a movie", todo.toString());
+        todo.mark();
+        assertEquals("[T] [X] Watch a movie", todo.toString());
+    }
+
+    /**
+     * Test for deadline string format.
+     */
+    @Test
+    public void testDeadlineToString() {
+        Task deadline = new DeadlinesTask("Submit", LocalDateTime.of(2026, 2, 20, 9, 30));
+        assertEquals("[D] [ ] Submit (by: Feb 20 2026 09:30)", deadline.toString());
+    }
+
+    /**
+     * Test for event string format.
+     */
+    @Test
+    public void testEventToString() {
+        Task event = new EventsTask("Meet", LocalDateTime.of(2026, 2, 21, 10, 0),
+                LocalDateTime.of(2026, 2, 21, 11, 0));
+        assertEquals("[E] [ ] Meet (from: Feb 21 2026 10:00 to: Feb 21 2026 11:00)", event.toString());
     }
 }
