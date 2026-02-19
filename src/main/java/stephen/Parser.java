@@ -10,6 +10,7 @@ public class Parser {
      */
     public Command parse(String input) {
         assert input != null : "User input should not be null";
-        return Command.command(input);
+        String normalized = input.trim().replaceAll("\\s+", " ");
+        return Command.command(normalized);
     }
 }

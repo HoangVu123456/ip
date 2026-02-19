@@ -51,7 +51,7 @@ public class DateParser {
             LocalDateTime dateTime = LocalDateTime.parse(dateString, STANDARD_FORMAT);
             return dateTime;
         } catch (Exception e) {
-            throw new IllegalArgumentException("Could not parse date: " + dateString);
+            throw new IllegalArgumentException("Char charmander! 🔥\n(Could not parse datetime: " + dateString + ")");
         }
     }
 

@@ -1,5 +1,7 @@
 package stephen;
 
+import stephen.exception.TaskAlreadyInStateException;
+
 /**
  * Represents a generic task.
  */
@@ -28,6 +30,10 @@ public abstract class Task {
      * Marks the task as done.
      */
     public void mark() {
+        if (this.isDone) {
+            throw new TaskAlreadyInStateException("Charmander! 🔥\n(Task is already marked as done.)");
+        }
+
         this.isDone = true;
     }
 
@@ -35,6 +41,10 @@ public abstract class Task {
      * Unmarks the task as not done.
      */
     public void unmark() {
+        if (!this.isDone) {
+            throw new TaskAlreadyInStateException("Charmander! 🔥\n(Task is already marked as not done.)");
+        }
+
         this.isDone = false;
     }
 

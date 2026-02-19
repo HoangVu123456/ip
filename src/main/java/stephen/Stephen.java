@@ -32,26 +32,27 @@ public class Stephen {
     public String getResponse(String input) {
         isLastResponseError = false;
         try {
-            Command cmd = parser.parse(input);
+            String normalized = input.trim().replaceAll("\\s+", " ");
+            Command cmd = parser.parse(normalized);
             switch (cmd) {
             case LIST:
                 return getListString();
             case MARK:
-                return getMarkString(input);
+                return getMarkString(normalized);
             case UNMARK:
-                return getUnmarkString(input);
+                return getUnmarkString(normalized);
             case DELETE:
-                return getDeleteString(input);
+                return getDeleteString(normalized);
             case BYE:
                 return "Char! Charmander char char! 🔥\n(Bye! Hope to see you again soon!)";
             case TODO:
-                return getTodoString(input);
+                return getTodoString(normalized);
             case DEADLINE:
-                return getDeadlineString(input);
+                return getDeadlineString(normalized);
             case EVENT:
-                return getEventString(input);
+                return getEventString(normalized);
             case FIND:
-                return getFindString(input);
+                return getFindString(normalized);
             case HELP:
                 return getHelpString();
             case UNKNOWN:
