@@ -1,0 +1,19 @@
+#rootPane {
+    -fx-background-image: url("/images/background.jpg");
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center center;
+    -fx-background-size: cover;
+}
+
+#scrollPane {
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+}
+
+#scrollPane .viewport {
+    -fx-background-color: transparent;
+}
+
+#dialogContainer {
+    -fx-background-color: transparent;
+}
