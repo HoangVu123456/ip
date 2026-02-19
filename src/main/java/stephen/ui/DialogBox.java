@@ -57,7 +57,7 @@ public class DialogBox extends HBox {
                 + "-fx-background-radius: 12;"
                 + "-fx-padding: 8 10 8 10;"
                 + "-fx-text-fill: #065f46;"
-                + "-fx-font-size: 13px;"
+                + "-fx-font-size: 16px;"
                 + "-fx-font-weight: bold;"
                 + "-fx-wrap-text: true;"
                 + "-fx-max-width: 260px;");
@@ -75,7 +75,7 @@ public class DialogBox extends HBox {
                     + "-fx-background-radius: 12;"
                     + "-fx-padding: 8 10 8 10;"
                     + "-fx-text-fill: #991b1b;"
-                    + "-fx-font-size: 13px;"
+                    + "-fx-font-size: 16px;"
                     + "-fx-font-weight: bold;"
                     + "-fx-wrap-text: true;"
                     + "-fx-max-width: 260px;");
@@ -84,7 +84,7 @@ public class DialogBox extends HBox {
                     + "-fx-background-radius: 12;"
                     + "-fx-padding: 8 10 8 10;"
                     + "-fx-text-fill: #9a3412;"
-                    + "-fx-font-size: 13px;"
+                    + "-fx-font-size: 16px;"
                     + "-fx-font-weight: bold;"
                     + "-fx-wrap-text: true;"
                     + "-fx-max-width: 260px;");
