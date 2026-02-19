@@ -15,6 +15,7 @@ public class Stephen {
     private Storage storage;
     private TaskList tasks;
     private Parser parser;
+    private boolean isLastResponseError;
 
     /**
      * Constructor for Stephen chatbot.
@@ -29,6 +30,7 @@ public class Stephen {
      * Get response from Stephen chatbot.
      */
     public String getResponse(String input) {
+        isLastResponseError = false;
         try {
             Command cmd = parser.parse(input);
             switch (cmd) {
@@ -57,8 +59,13 @@ public class Stephen {
                 );
             }
         } catch (Exception e) {
+            isLastResponseError = true;
             return e.getMessage();
         }
+    }
+
+    public boolean isLastResponseError() {
+        return isLastResponseError;
     }
     /**
      * Gets the string representation to the response for list command.

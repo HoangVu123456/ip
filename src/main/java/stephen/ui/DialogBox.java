@@ -52,15 +52,43 @@ public class DialogBox extends HBox {
      * Creates a dialog box for the user.
      */
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+        var db = new DialogBox(text, img);
+        db.dialog.setStyle("-fx-background-color: #d1fae5;"
+                + "-fx-background-radius: 12;"
+                + "-fx-padding: 8 10 8 10;"
+                + "-fx-text-fill: #065f46;"
+                + "-fx-font-size: 13px;"
+                + "-fx-font-weight: bold;"
+                + "-fx-wrap-text: true;"
+                + "-fx-max-width: 260px;");
+        return db;
     }
 
     /**
      * Creates a dialog box for Stephen.
      */
-    public static DialogBox getStephenDialog(String text, Image img) {
+    public static DialogBox getStephenDialog(String text, Image img, boolean isError) {
         var db = new DialogBox(text, img);
         db.flip();
+        if (isError) {
+            db.dialog.setStyle("-fx-background-color: #fecaca;"
+                    + "-fx-background-radius: 12;"
+                    + "-fx-padding: 8 10 8 10;"
+                    + "-fx-text-fill: #991b1b;"
+                    + "-fx-font-size: 13px;"
+                    + "-fx-font-weight: bold;"
+                    + "-fx-wrap-text: true;"
+                    + "-fx-max-width: 260px;");
+        } else {
+            db.dialog.setStyle("-fx-background-color: #fed7aa;"
+                    + "-fx-background-radius: 12;"
+                    + "-fx-padding: 8 10 8 10;"
+                    + "-fx-text-fill: #9a3412;"
+                    + "-fx-font-size: 13px;"
+                    + "-fx-font-weight: bold;"
+                    + "-fx-wrap-text: true;"
+                    + "-fx-max-width: 260px;");
+        }
         return db;
     }
 }
