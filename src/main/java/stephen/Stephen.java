@@ -52,10 +52,12 @@ public class Stephen {
                 return getEventString(input);
             case FIND:
                 return getFindString(input);
+            case HELP:
+                return getHelpString();
             case UNKNOWN:
             default:
                 throw new InvalidInputException(
-                    "Char, char? Charmander! 🔥\n(I don't understand what you mean!)"
+                    "Char, char? Charmander! 🔥\n(I don't understand what you mean! \nType \"help\" for a list of commands)"
                 );
             }
         } catch (Exception e) {
@@ -66,6 +68,24 @@ public class Stephen {
 
     public boolean isLastResponseError() {
         return isLastResponseError;
+    }
+    /**
+     * Gets the string representation to the response for help command.
+     */
+    private String getHelpString() {
+        return "Char char! Charmander! 🔥\n"
+                + "(Here's what I can do for you!)\n\n"
+                + " 1. list - View all your tasks\n"
+                + " 2. mark <number> - Mark a task\n"
+                + " 3. unmark <number> - Unmark a task\n"
+                + " 4. delete <number> - Remove a task\n"
+                + " 5. todo <description> - Add a todo task\n"
+                + " 6. deadline <description> /by <date/time> - Add a deadline task\n"
+                + " 7. event <description> /from <date/time> /to <date/time> - Add an event task\n"
+                + " 8. find <keyword> - Search for tasks with a keyword\n"
+                + " 9. help - Show the help message\n"
+                + " 10. bye - Exit the app\n\n"
+                + "Char! 🔥 (Let's catch 'em all!)";
     }
     /**
      * Gets the string representation to the response for list command.
