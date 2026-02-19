@@ -27,7 +27,7 @@ public class Stephen {
     }
 
     /**
-     * Get response from Stephen chatbot.
+     * Gets the response from Stephen chatbot.
      */
     public String getResponse(String input) {
         isLastResponseError = false;
