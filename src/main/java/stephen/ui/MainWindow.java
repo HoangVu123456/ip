@@ -45,7 +45,7 @@ public class MainWindow extends AnchorPane {
     private void showWelcomeMessage() {
         String welcomeMessage = "Hello! I'm Stephen\nWhat can I do for you?";
         dialogContainer.getChildren().add(
-                DialogBox.getStephenDialog(welcomeMessage, stephenImage)
+                DialogBox.getStephenDialog(welcomeMessage, stephenImage, false)
         );
     }
 
@@ -58,9 +58,10 @@ public class MainWindow extends AnchorPane {
         assert stephen != null : "Stephen instance should be set before handling input";
         String input = userInput.getText();
         String response = stephen.getResponse(input);
+        boolean isError = stephen.isLastResponseError();
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
-                DialogBox.getStephenDialog(response, stephenImage)
+                DialogBox.getStephenDialog(response, stephenImage, isError)
         );
         userInput.clear();
 
