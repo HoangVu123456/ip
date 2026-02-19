@@ -57,10 +57,7 @@ public class Storage {
 
         if (task != null && isDone) {
             task.mark();
-        } else {
-            task.unmark();
         }
-
         return task;
     }
 
