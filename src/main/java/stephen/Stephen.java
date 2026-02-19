@@ -58,7 +58,8 @@ public class Stephen {
             case UNKNOWN:
             default:
                 throw new InvalidInputException(
-                    "Char, char? Charmander! 🔥\n(I don't understand what you mean! \nType \"help\" for a list of commands)"
+                    "Char, char? Charmander! 🔥"
+                            + "\n(I don't understand what you mean! \nType \"help\" for a list of commands.)"
                 );
             }
         } catch (Exception e) {
@@ -114,7 +115,8 @@ public class Stephen {
         }
         tasks.getTask(markIndex).mark();
         storage.save(tasks.getTasks());
-            return "Char mander! 🔥\n(OK, I've marked this task as done: " + tasks.getTask(markIndex).toString() + ")";
+
+        return "Char mander! 🔥\n(OK, I've marked this task as done: " + tasks.getTask(markIndex).toString() + ")";
     }
     /**
      * Gets the string representation to the response for unmark command.
@@ -128,7 +130,8 @@ public class Stephen {
         }
         tasks.getTask(unmarkIndex).unmark();
         storage.save(tasks.getTasks());
-        return "Char char! 🔥\n(OK, I've marked this task as not done yet: " + tasks.getTask(unmarkIndex).toString() + ")";
+        return "Char char! 🔥\n(OK, I've marked this task as not done yet: "
+                + tasks.getTask(unmarkIndex).toString() + ")";
     }
     /**
      * Gets the string representation to the response for delete command.
