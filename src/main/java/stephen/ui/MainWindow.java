@@ -43,7 +43,7 @@ public class MainWindow extends AnchorPane {
      * Shows the welcome message when the app starts.
      */
     private void showWelcomeMessage() {
-        String welcomeMessage = "Hello! I'm Stephen\nWhat can I do for you?";
+        String welcomeMessage = "Char char charmander! 🔥\n(Hello! I'm Stephen\nWhat can I do for you?)";
         dialogContainer.getChildren().add(
                 DialogBox.getStephenDialog(welcomeMessage, stephenImage, false)
         );
