@@ -113,7 +113,7 @@ public class Stephen {
         }
         tasks.getTask(markIndex).mark();
         storage.save(tasks.getTasks());
-        return "Char mander! 🔥\nNice! I've marked this task as done: " + tasks.getTask(markIndex).toString();
+            return "Char mander! 🔥\n(OK, I've marked this task as done: " + tasks.getTask(markIndex).toString() + ")";
     }
     /**
      * Gets the string representation to the response for unmark command.
@@ -127,7 +127,7 @@ public class Stephen {
         }
         tasks.getTask(unmarkIndex).unmark();
         storage.save(tasks.getTasks());
-        return "Char char! 🔥\n (OK, I've marked this task as not done yet: " + tasks.getTask(unmarkIndex).toString() + ")";
+        return "Char char! 🔥\n(OK, I've marked this task as not done yet: " + tasks.getTask(unmarkIndex).toString() + ")";
     }
     /**
      * Gets the string representation to the response for delete command.
