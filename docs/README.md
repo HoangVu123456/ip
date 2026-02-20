@@ -224,11 +224,11 @@ Char! Charmander char char!
 - Copilot helps me choosing the colour for dialog box chat and generate random Charmander chatting message.
 - Copilot suggest me which pokemon to used as background image.
 
-Reference(s) used for User Guide:
+Reference(s) used for User Guide:  
 https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html
 
 Reference(s) used for working with Java:  
 https://www.w3schools.com/java/
 
-Reference(s) used for working with Java Fxml:
+Reference(s) used for working with Java Fxml:  
 https://jenkov.com/tutorials/javafx/fxml.html
