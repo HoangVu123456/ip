@@ -1,6 +1,6 @@
 # Stephen User Guide
 
-Char char, Charmander! 🔥 Let's the adorable charmander: Stephen help you organize your tasks!
+Char char, Charmander! Let's the adorable charmander: Stephen help you organize your tasks!
 
 ![Stephen UI](../src/main/resources/images/background.jpg)
 
@@ -26,7 +26,7 @@ Command:
 Example output:
 
 ```
-Char char! 🔥
+Char char!
 (Here are the tasks in your list:
 1. [T] [ ] Read book
 2. [D] [X] Submit (by: Feb 20 2026 09:30)
@@ -48,7 +48,7 @@ Example:
 Expected output:
 
 ```
-Char char mander! 🔥
+Char char mander!
 (Got it. I've added this task:
  [T] [ ] Read book
 Now you have 1 tasks in the list.)
@@ -71,7 +71,7 @@ Examples:
 Expected output:
 
 ```
-Char char mander! 🔥
+Char char mander!
 (Got it. I've added this task:
  [D] [ ] Submit report (by: Feb 20 2026 09:30)
 Now you have 2 tasks in the list.)
@@ -92,7 +92,7 @@ Example:
 Expected output:
 
 ```
-Char char mander! 🔥
+Char char mander!
 (Got it. I've added this task:
  [E] [ ] Team meeting (from: Feb 21 2026 10:00 to: Feb 21 2026 11:00)
 Now you have 3 tasks in the list.)
@@ -111,7 +111,7 @@ Example:
 Expected output:
 
 ```
-Char mander! 🔥
+Char mander!
 (OK, I've marked this task as done: [D] [X] Submit report (by: Feb 20 2026 09:30))
 ```
 
@@ -128,7 +128,7 @@ Example:
 Expected output:
 
 ```
-Char char! 🔥
+Char char!
 (OK, I've marked this task as not done yet: [D] [ ] Submit report (by: Feb 20 2026 09:30))
 ```
 
@@ -145,7 +145,7 @@ Example:
 Expected output:
 
 ```
-Charmander! 🔥
+Charmander!
 (Noted. I've removed this task: [E] [ ] Team meeting (from: Feb 21 2026 10:00 to: Feb 21 2026 11:00)
 Now you have 2 tasks in the list.)
 ```
@@ -165,7 +165,7 @@ Example:
 Expected output:
 
 ```
-Char char! 🔥
+Char char!
 (Here are the matching tasks in your list:
 1. [E] [ ] Team meeting (from: Feb 21 2026 10:00 to: Feb 21 2026 11:00))
 ```
@@ -181,7 +181,7 @@ Command:
 Expected output:
 
 ```
-Char char! Charmander! 🔥
+Char char! Charmander!
 (Here's what I can do for you!)
 
  1. list - View all your tasks
@@ -195,7 +195,7 @@ Char char! Charmander! 🔥
  9. help - Show the help message
  10. bye - Exit the app
 
-Char! 🔥 (Let's catch 'em all!)
+Char! (Let's catch 'em all!)
 ```
 
 ### Exit
@@ -209,7 +209,7 @@ Command:
 Expected output:
 
 ```
-Char! Charmander char char! 🔥
+Char! Charmander char char!
 (Bye! Hope to see you again soon!)
 ```
 

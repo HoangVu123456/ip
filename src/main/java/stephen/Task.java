@@ -31,7 +31,7 @@ public abstract class Task {
      */
     public void mark() {
         if (this.isDone) {
-            throw new TaskAlreadyInStateException("Charmander! 🔥\n(Task is already marked as done.)");
+            throw new TaskAlreadyInStateException("Charmander! \n(Task is already marked as done.)");
         }
 
         this.isDone = true;
@@ -42,7 +42,7 @@ public abstract class Task {
      */
     public void unmark() {
         if (!this.isDone) {
-            throw new TaskAlreadyInStateException("Charmander! 🔥\n(Task is already marked as not done.)");
+            throw new TaskAlreadyInStateException("Charmander! \n(Task is already marked as not done.)");
         }
 
         this.isDone = false;
