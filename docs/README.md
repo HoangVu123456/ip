@@ -2,7 +2,7 @@
 
 Char char, Charmander! Let's the adorable charmander: Stephen help you organize your tasks!
 
-![Stephen UI](../src/main/resources/images/background.jpg)
+![Stephen UI](background.jpg)
 
 ## Quick Start
 
