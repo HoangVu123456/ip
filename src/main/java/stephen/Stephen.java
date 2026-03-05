@@ -146,7 +146,7 @@ public class Stephen {
         Task removedTask = tasks.deleteTask(deleteIndex);
         storage.save(tasks.getTasks());
         return "Charmander!\n(Noted. I've removed this task: " + removedTask.toString()
-                + "\nNow you have " + tasks.size() + " tasks in the list.)";  
+                + "\nNow you have " + tasks.size() + " tasks in the list.)";
     }
     /**
      * Gets the string representation to the response for todo command.
